@@ -52,7 +52,7 @@ def tweet_media_urls(tweet_status):
 def create_folder(output_folder):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
-def download_images(status, num_tweets, output_folder):
+def download_videos(status, num_tweets, output_folder):
     create_folder(output_folder)
     downloaded = 0
     for tweet_status in status:
@@ -67,14 +67,14 @@ def download_images(status, num_tweets, output_folder):
                 # TODO: Figure out how to include ':orig' at the end in a way that works with wget to get the
                 wget.download(media_url, out=output_folder + '/' + file_name)
                 downloaded += 1
-def download_images_by_user(api, username, retweets, replies, num_tweets, output_folder):
+def download_videos_by_user(api, username, retweets, replies, num_tweets, output_folder):
     status = tweepy.Cursor(api.user_timeline, screen_name=username, include_rts=retweets, exclude_replies=replies,
                            tweet_mode='extended').items()
-    download_images(status, num_tweets, output_folder)
-def download_images_by_tag(api, tag, retweets, replies, num_tweets, output_folder):
+    download_videos(status, num_tweets, output_folder)
+def download_videos_by_tag(api, tag, retweets, replies, num_tweets, output_folder):
     status = tweepy.Cursor(api.search_tweets, '#' + tag, include_rts=retweets, exclude_replies=replies,
                            tweet_mode='extended').items()
-    download_images(status, num_tweets, output_folder)
+    download_videos(status, num_tweets, output_folder)
 def main():
     arguments = parse_arguments()
     username = arguments.username
@@ -88,8 +88,8 @@ def main():
     auth = authorise_twitter_api(config)
     api = tweepy.API(auth, wait_on_rate_limit=True)
     if hashtag:
-        download_images_by_tag(api, hashtag, retweets, replies, num_tweets, output_folder)
+        download_videos_by_tag(api, hashtag, retweets, replies, num_tweets, output_folder)
     else:
-        download_images_by_user(api, username, retweets, replies, num_tweets, output_folder)
+        download_videos_by_user(api, username, retweets, replies, num_tweets, output_folder)
 if __name__ == '__main__':
     main()
