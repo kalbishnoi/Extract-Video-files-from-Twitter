@@ -1,7 +1,7 @@
 # Extract-Video-files-from-Twitter
 Python program for extracting video files directly from tweets.
 # Steps to use the code:
-1. keep the config.cfg file in the same directory as of the code.
+1. Keep the config.cfg file in the same directory as of the code.
 2. Open the code
 3. Give arguements to the code in the following way:
 --username SamsungIndia --num 10 --output Videos
